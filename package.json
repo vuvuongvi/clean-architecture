@@ -1,0 +1,44 @@
+{
+  "name": "health-check-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --ignore-path .gitignore .",
+    "clean": "rm -rf dist",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "build": "npm run clean  && npm run dist",
+    "dist": "babel src --out-dir dist --copy-files",
+    "start": "node dist/index.js",
+    "start:dev": "nodemon src/index.js --exec babel-node",
+    "start:test": "babel-node test/test",
+    "tests": "NODE_ENV=test PG_DB=test_policy_service nyc ava --serial",
+    "test:watch": "NODE_ENV=test PG_DB=test_policy_service ava --serial --watch",
+    "load": "babel-node test/load.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuvuongvi/health-check-system.git"
+  },
+  "author": "vuvuongvi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vuvuongvi/health-check-system/issues"
+  },
+  "homepage": "https://github.com/vuvuongvi/health-check-system#readme",
+  "dependencies": {
+    "babel-plugin-transform-builtin-extend": "^1.1.2",
+    "babel-preset-stage-0": "^6.24.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
